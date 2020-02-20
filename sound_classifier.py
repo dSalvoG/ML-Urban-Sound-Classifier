@@ -4,8 +4,6 @@
 # # Load Models on Raspberry Pi
 
 # In[1]:
-
-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import tensorflow as tf
@@ -14,18 +12,12 @@ import tensorflow as tf
 
 # models
 from tensorflow.keras import datasets, layers, models
-
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
-
 import numpy as np
 
 print(tf.__version__)
 
 
 # In[2]:
-
-
 # Load pre-trained model
 model = tf.keras.models.load_model('models/no10_model.h5')
 
@@ -36,8 +28,6 @@ model = tf.keras.models.load_model('models/no10_model.h5')
 # In real-life, the unlabeled examples could come from lots of different sources including apps, CSV files, and data feeds. For now, we're going to manually provide three unlabeled examples to predict their labels. Recall, the label numbers are mapped to a named representation as:
 
 # In[5]:
-
-
 # Loading Features and Label arrays
 features_test = np.load('features_test10.npy')
 labels_test = np.load('labels_test10.npy')
@@ -45,8 +35,6 @@ labels_test = np.load('labels_test10.npy')
 
 
 # In[6]:
-
-
 # test_loss, test_acc = model.evaluate(features_test, labels_test, verbose=2)
 test_loss, test_acc = model.evaluate(features_test, labels_test, verbose=2)
 
