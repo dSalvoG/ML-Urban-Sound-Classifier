@@ -19,7 +19,7 @@ print(tf.__version__)
 
 # In[2]:
 # Load pre-trained model
-model = tf.keras.models.load_model('models/no10_model.h5')
+model = tf.keras.models.load_model('models/no1_model.h5')
 
 
 # # Use the trained model to make predictions
@@ -29,8 +29,8 @@ model = tf.keras.models.load_model('models/no10_model.h5')
 
 # In[5]:
 # Loading Features and Label arrays
-features_test = np.load('features_test10.npy')
-labels_test = np.load('labels_test10.npy')
+features_test = np.load('features_test1.npy')
+labels_test = np.load('labels_test1.npy')
 # print(features_test)
 
 
