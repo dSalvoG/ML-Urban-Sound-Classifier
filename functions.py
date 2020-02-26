@@ -1,8 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import tensorflow as tf
-from tensorflow.keras import models
-
 import glob
 import os
 import pandas as pd
@@ -52,13 +49,3 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     
     return np.array(features), np.array(labels,dtype = np.int)
 
-def print_prediction(parent_dir,sub_dirs):
-
-    features,labels = extract_features(parent_dir,sub_dirs)
-    predicted_vector = model.predict_classes(features)
-    print("The predicted class is:", class_names[predicted_vector[0]], '\n') 
-
-    predicted_proba_vector = model.predict_proba(features) 
-    predicted_proba = predicted_proba_vector[0]
-    for i in range(len(predicted_proba)): 
-        print(class_names[i], "\t\t : ", format(predicted_proba[i], '.32f') )
