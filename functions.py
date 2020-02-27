@@ -19,13 +19,6 @@ def get_stream(audio, window_size): # fix the audio data size up to 3s (512*128f
 
     return stream
 
-def windows(data, window_size):
-    start = 0
-    while start < len(data):
-        yield int(start), int(start + window_size)
-        start += (window_size / 2)
-
-
 def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 128):
     window_stream = 512 * (frames - 1) 
     log_specgrams = []
@@ -33,7 +26,7 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     for l, sub_dir in enumerate(sub_dirs):
         for fn in glob.glob(os.path.join(os.path.abspath(parent_dir),sub_dir,file_ext)):
             sound_clip,s = librosa.load(fn)
-            label = fn.split('-')[3]
+            label = fn.split('-')[1]
             stream = get_stream(sound_clip,window_stream)
 
             melspec = librosa.feature.melspectrogram(stream, sr=s, win_length=512, n_mels = bands)

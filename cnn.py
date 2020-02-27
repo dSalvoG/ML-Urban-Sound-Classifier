@@ -19,8 +19,8 @@ from keras.utils import np_utils
 from sklearn import metrics 
 
 # LOAD FEATURES AND LABELS
-features = np.load('../../audio/train_dataset/features_no5.npy')
-labels = np.load('../../audio/train_dataset/labels_no5.npy')
+features = np.load('audio/train_dataset/features_no6.npy')
+labels = np.load('audio/train_dataset/labels_no6.npy')
 
 # SPLIT DATASET: set into training and test
 validation_size = 0.20
@@ -28,41 +28,39 @@ seed = 42
 X_train, X_test, Y_train, Y_test = model_selection.train_test_split(features, labels, test_size=validation_size, random_state=seed)
 
 # CONSTRUCT MODEL 
-def create_model():
-    start = datetime.now()
-    model = models.Sequential()
+model = models.Sequential()
 
-    model.add(layers.Conv2D(24, (5, 5), activation='relu', input_shape=(128, 128, 2)))
-    model.add(layers.MaxPooling2D((4, 2)))
-    model.add(layers.Dropout(0.5))
+model.add(layers.Conv2D(24, (5, 5), activation='relu', input_shape=(128, 128, 2)))
+model.add(layers.MaxPooling2D((4, 2)))
+model.add(layers.Dropout(0.5))
 
-    model.add(layers.Conv2D(48, (5, 5), activation='relu'))
-    model.add(layers.MaxPooling2D((4, 2)))
-    model.add(layers.Dropout(0.5))
+model.add(layers.Conv2D(48, (5, 5), activation='relu'))
+model.add(layers.MaxPooling2D((4, 2)))
+model.add(layers.Dropout(0.5))
 
-    model.add(layers.Conv2D(48, (5, 5), activation='relu'))
+model.add(layers.Conv2D(48, (5, 5), activation='relu'))
 
-    model.add(layers.Flatten())
-    model.add(layers.Dense(64, activation='relu'))
-    model.add(layers.Dense(10, activation='softmax'))
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(10, activation='softmax'))
 
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    duration = datetime.now() - start
-    print("Model compilation completed in time: ", duration)
-    # model.summary()
-    return model
+
+# model.summary()
 
 # LOAD MODEL
 # model = tf.keras.models.load_model('models/no10_model.h5')
 
 # CREATE MODEL 
-model=create_model()
-model.summary()
+# model=create_model()
+# model.summary()
 
 # TRAINING
+start = datetime.now()
 model.fit(X_train, Y_train, epochs=25, validation_data=(X_test, Y_test))
-
+duration = datetime.now() - start
+print("Model compilation completed in time: ", duration)
 # from sklearn.model_selection import KFold
 # n_split=10
 
@@ -88,4 +86,4 @@ print("Training Accuracy: ", train_score[1])
 print("Testing Accuracy: ", test_score[1])
 
 # Save Model
-# model.save('models/no5_model_25epchs.h5')
+model.save('models/no6_model.h5')
