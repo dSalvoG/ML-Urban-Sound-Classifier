@@ -12,7 +12,6 @@ print("Tensorflow version: ", tf.__version__)
 # LOAD FEATURES AND LABELS
 features_test = np.load('features_test1.npy')
 labels_test = np.load('labels_test1.npy')
-# print(features_test)
 
 # LOAD PRE-TRAINED MODEL
 model = tf.keras.models.load_model('models/no1_model.h5')

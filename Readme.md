@@ -1,6 +1,7 @@
-# Urban Classifier with CNN on Raspberry Pi Model 3
+# Urban Sound Classification with CNN on Raspberry Pi Model 3
 
 Author: David Salvo Gutiérrez
+
 Work Group: GTAC-iTEAM (Universitat Politècnica de València)
 
 ## Feature extraction from sound
@@ -57,14 +58,40 @@ source:
 J. Salamon, C. Jacoby and J. P. Bello, "A Dataset and Taxonomy for Urban Sound Research", 
 22nd ACM International Conference on Multimedia, Orlando USA, Nov. 2014.
 
+### Project Dataset
+In this rep it is not uploaded all audio dataset and features extracted to test and play the Classifier, for that should download full audio directori in this link:
+
+https://mega.nz/#F!CZJDEAyA!kZT8d6Xl7A6sjGhU6xevSA
+
+Audio folder contains the folders before:
+
+    /audio
+        /fold* (1-10)
+        /metadata
+        /test
+        /test_valencia_sound_dataset
+        /train_dataset
+
+* fold: contains audio files from UrbanSound8K dataset.
+* metadata: contains excel file in wich one it is describe all audio dataset provide by UrbanSound8K
+* test: contains numpy array extracted from individual folds, from *fold* folders, using the script *sound_featuring.py*
+* test_valencia_sound_dataset: contains numpy array extracted from valencia recorded audio files, from *UrbanSoun_Valencia_dataset*
+* train_dataset: contains numpy array extracted from set of *folds*. *features_no1.npy* represents all feature and label extracted from all folds exept *fold 1* using the script *sound_featuring.py*
+
+# How to use this rep?
+
+In this rep it is upload all scripts used to implement a cnn classificator for urban sound into a raspberry pi model 3. To implement a functional demo using this rep, you should follow the following indications.
+
+You should take into account that the model it should be trained in the PC saved as a .h5 file and then load into the raspberry pi. To train the model first of all you must create a numpy array with the features and labels from the dataset you are going to use, you should use the script *sound_featuring.py* indicating inside it wich are .wav files to be analize.
+
+Whe you get the features and label using *sound_featuring.py* you can train the model using *cnn.py* and indicating wich are the numpy array to use to train the model.
+
+Finally you could test the project on the raspberry pi, using the scripts, *sound_featuring.py* to get the features from the audio segment to classify, and use *sound_classifier.py* to classify using the features extracted, between the 10 classes defined.
+
 # Project Directory
 For a correct use of the repository, the directory structure must follow the following example, taking into account that the feature extraction function get labels from the .wav filename, using the number of '-' presented to get the correct label value.
 
 /user/ml-exercise/ml-soundFeat/soundFeat/(all project files and directories)
-
-In this rep it is not upload all audio dataset and features extracted to test and play the Classifier, for that should download full audio directori in this link:
-
-(ENLACE MEGA CON CARPETA AUDIO)
 
 Once you get audio directory, you should get a directory named 'soundFeat' with the following files and directories:
 
@@ -102,20 +129,20 @@ In this directory there's all audio content and features extracted used to make 
 
 In this project you would find differents python scripts in orther to deploy a functional urban sound classifier over a Raspberry Pi Model 3. I would explain the content and utility of each python scrip used in this folder.
 
-**functions** in this file you would fine the functions used to extract features and label from an audio file (.wav extension).
+**functions:** in this file you would fine the functions used to extract features and label from an audio file (.wav extension).
 
-**sound_featuring** in this script you would fine the implementation of the extraction of the features and label from an specific set of audio files.
+**sound_featuring:** in this script you would fine the implementation of the extraction of the features and label from an specific set of audio files.
 
-**sound_classifier** in this script you would fine the script to implement into a Raspberry Pi to classifie new audio inputs, using a trained model, that you would fine in the script cnn in wich you could train new models.
+**sound_classifier:** in this script you would fine the script to implement into a Raspberry Pi to classifie new audio inputs, using a trained model, that you would fine in the script cnn in wich you could train new models.
 
-**cnn** in this script you would fine the implementation of an cnn model and the resources needed for train an test the model.
+**cnn:** in this script you would fine the implementation of an cnn model and the resources needed for train an test the model.
 
-**class_validation** in this script you would fine a function to test the model trained and imported with new input data getting the classification % for each class.
+**class_validation:** in this script you would fine a function to test the model trained and imported with new input data getting the classification % for each class.
 
 # Stand up the project
 
- ## To extract the Fetures and Label (sound_featuring)
- To get the feature extraction for supervise learning or a unknown audio file, you should use the script **sound_featuring** in wich you would define the directory where it is your set or just one .wav file to get their features and use them to classifie the source.
+## To extract the Fetures and Label (sound_featuring)
+To get the feature extraction for supervise learning or a unknown audio file, you should use the script **sound_featuring** in wich you would define the directory where it is your set or just one .wav file to get their features and use them to classifie the source.
 
 If you see the content of the script, you would need to modify the name of the 'parent_dir' and 'sub_dir', in wich it is save your .wav file to classifie. 
 
