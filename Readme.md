@@ -162,7 +162,9 @@ IMPORTANT: as it is define on the function *feature_extraction* labels are being
                 sound_clip,s = librosa.load(fn)
                 label = fn.split('-')[3] (this number indentifies)
 
-Taking into account that it is define that we would get the third value of the .wav directory path after the third '-' character in the path, like the next example:
+Path should be like this: C:\Users\user_name\ml-exercises\ml-soundFeat\soundFeat\audio\fold6
+
+Taking into account that it is defined like we would get the third value of the .wav directory path after the third '-' character in the path, like the next example:
 
     /ml-exercise
         /ml-soundFeat
@@ -170,7 +172,9 @@ Taking into account that it is define that we would get the third value of the .
                 /fold1
                     /7061-6-0-0.wav (labe 6: class gun shot)
 
-If in the function it is define with the number [3], we would get the label **'6'** following the example before.
+If in the function it is define with the number [3], we would get the label **'6'** following the example before. In other hands, if you change the value to the number [1] the folder path for audio files should be like this (without any '-' character):
+
+C:\Users\user_name\mlexercises\mlsoundFeat\soundFeat\audio\fold6
 
 ## To train the model (cnn)
 

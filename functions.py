@@ -26,7 +26,7 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     for l, sub_dir in enumerate(sub_dirs):
         for fn in glob.glob(os.path.join(os.path.abspath(parent_dir),sub_dir,file_ext)):
             sound_clip,s = librosa.load(fn)
-            label = fn.split('-')[1]
+            label = fn.split('-')[3]
             stream = get_stream(sound_clip,window_stream)
 
             melspec = librosa.feature.melspectrogram(stream, sr=s, win_length=512, n_mels = bands)
