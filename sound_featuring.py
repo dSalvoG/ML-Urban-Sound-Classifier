@@ -1,3 +1,6 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 import numpy as np
 
 from datetime import datetime 

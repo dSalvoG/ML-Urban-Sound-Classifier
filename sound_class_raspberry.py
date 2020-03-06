@@ -1,31 +1,46 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 # # LOAD MODELS RASPBERRY PI
 from __future__ import absolute_import, division, print_function, unicode_literals
+
+from datetime import datetime 
+start = datetime.now()
 
 import tensorflow as tf
 
 from tensorflow.keras import datasets, layers, models
 import numpy as np
 
-from datetime import datetime 
 from functions import extract_features
 
-parent_dir = 'audio'
-sub_dirs= ['fold9']
-start = datetime.now()
-features,labels = extract_features(parent_dir,sub_dirs)
+def print_class(parent_dir, sub_dirs):
+    features,labels = extract_features(parent_dir,sub_dirs)
+    predicted_vector = model.predict_classes(features)
+    # print(predicted_vector.size())
+    print('\n')
+    print("Original class:", class_names[labels[0]]) 
+    print("The predicted class is:", class_names[predicted_vector[0]], '\n') 
+    predicted_proba_vector = model.predict_proba(features) 
+    predicted_proba = predicted_proba_vector[0]
+    for i in range(len(predicted_proba)): 
+        print(class_names[i], "\t\t : ", format(predicted_proba[i], '.32f') )
 
-# Saving Features and Labels arrays
-np.save('features_test9', features)
-np.save('labels_test9', labels)
-
-duration = datetime.now() - start
-print("Feature and label extraction saved in time: ", duration)
-
-# LOAD FEATURES AND LABELS
-features = np.load('features_test1.npy')
-labels = np.load('labels_test1.npy')
 
 # LOAD PRE-TRAINED MODEL
-model = tf.keras.models.load_model('models/no1_model.h5')
-# MODEL EVALUATION
-test_loss, test_acc = model.evaluate(features_test, labels_test, verbose=2)
+model = tf.keras.models.load_model('models/no10_model.h5')
+
+# CLASSIFICATION
+
+class_names = ['Air Conditioner', 'Car Horn', 'Children Playing', 'Dog Bark', 
+               'Drilling', 'Engine Idling', 'Gun Shot', 
+               'Jackhammer', 'Siren', 'Street Music']
+
+parent_dir = 'audio'
+sub_dirs= ['input']
+
+print_class(parent_dir,sub_dirs)  
+
+duration = datetime.now() - start
+print('\n')
+print("Classification Duration: ", duration, '\n')

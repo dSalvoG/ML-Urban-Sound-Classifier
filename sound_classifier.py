@@ -1,3 +1,6 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 # # LOAD MODELS RASPBERRY PI
 from __future__ import absolute_import, division, print_function, unicode_literals
 

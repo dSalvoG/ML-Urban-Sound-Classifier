@@ -1,3 +1,6 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 
@@ -14,7 +17,7 @@ from datetime import datetime
 # Load pre-trained model
 model = tf.keras.models.load_model('models/no10_model.h5')
 
-def print_prediction(parent_dir, sub_dirs):
+def print_class(parent_dir, sub_dirs):
     features,labels = extract_features(parent_dir,sub_dirs)
     predicted_vector = model.predict_classes(features)
     print(predicted_vector.size())
@@ -41,10 +44,11 @@ labels_test = np.load('audio/test_valencia_dataset/labels_Valencia.npy')
 # FOR CLASIFICATION NEW INPUTS
 parent_dir = 'audio/UrbanSound_Valencia_dataset'
 sub_dirs= ['Horn']
-print_prediction(parent_dir,sub_dirs)
+print_class(parent_dir,sub_dirs)
 
 # # Other Example of prediction
-prediction = model.predict_classes(features_test)
-# show the inputs and predicted outputs
+classification = model.predict_classes(features_test)
+
+# For big input datashet, show the inputs and classified outputs
 for i in range(len(features_test)):
 	print("Predicted=%s " % (class_names[prediction[i]]) + ', Real Value=%s ' % (class_names[labels_test[i]]))
