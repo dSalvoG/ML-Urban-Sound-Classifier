@@ -2,14 +2,12 @@
 # Author: David Salvo Gutiérrez
 
 # # LOAD MODELS RASPBERRY PI
-from __future__ import absolute_import, division, print_function, unicode_literals
-
 from datetime import datetime 
 start = datetime.now()
 
 import tensorflow as tf
 
-from tensorflow.keras import datasets, layers, models
+from tensorflow.keras import models
 import numpy as np
 
 from functions import extract_features
