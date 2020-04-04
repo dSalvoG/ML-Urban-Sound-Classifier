@@ -22,7 +22,10 @@ def print_class(parent_dir, sub_dirs):
     predicted_proba_vector = model.predict_proba(features) 
     predicted_proba = predicted_proba_vector[0]
     for i in range(len(predicted_proba)): 
+        print(i)
         print(class_names[i], "\t\t : ", format(predicted_proba[i], '.32f') )
+    return predicted_proba
+    
 
 
 # LOAD PRE-TRAINED MODEL
@@ -37,8 +40,51 @@ class_names = ['Air Conditioner', 'Car Horn', 'Children Playing', 'Dog Bark',
 parent_dir = 'audio'
 sub_dirs= ['input']
 
-print_class(parent_dir,sub_dirs)  
+predicted = print_class(parent_dir,sub_dirs)  
 
 duration = datetime.now() - start
 print('\n')
 print("Classification Duration: ", duration, '\n')
+# print(format(predicted[1], '.32f'))
+
+import json
+
+# # passing data classification to json format
+# data_set = {
+#     "Air Conditioner": predicted[0],
+#     "Car Horn": predicted[1],
+#     "Children Playing": predicted[2],
+#     "Dog Bark": predicted[3],
+#     "Drilling": predicted[4],
+#     "Engine Idling": predicted[5],
+#     "Gun Shot": predicted[6],
+#     "Jackhammer": predicted[7],
+#     "Siren": predicted[8],
+#     "Street Music": predicted[9]
+# }
+
+# json_dump = json.dumps(data_set)
+
+# ## Making a POST request to Orion Broker
+# import requests
+
+# # defining the api-endpoint
+# API_ENDPOINT = ""
+
+# # headers
+# headers_string={
+#     'somekey':'somevalue',
+#     'somekey':'somevalue'
+#     }
+
+# # data to be sent to api
+# payload = {
+#     'somekey':'somevalue',
+#     'somekey':'somevalue'
+#     }
+
+# # request post (using json payload)
+# x = requests.post(url= API_ENDPOINT, json= payload, headers= headers_string,)
+
+# #print the response text (the content of the requested file):
+# print(x.text)

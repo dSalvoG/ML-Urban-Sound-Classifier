@@ -1,0 +1,48 @@
+version: "3.5"
+
+services:
+  orion_mongo:
+    image: mongo:3.6
+    container_name: orion_mongo
+    hostname: orion_mongo
+    expose:
+      - "27017"
+    volumes:
+      - type: volume
+        source: orion_mongo_db
+        target: /data/db
+        read_only: false
+      - type: volume
+        source: orion_mongo_configdb
+        target: /data/configdb
+        read_only: false
+    networks:
+      - orion_net
+    restart: always
+
+  orion:
+    image: fiware/orion:2.3.0
+    container_name: orion
+    hostname: orion
+    ports:
+      - "1026:1026"
+    # expose:
+    #   - "1026"
+    networks:
+      - fiware_net
+      - orion_net
+    restart: always
+    depends_on:
+      - orion_mongo
+    command: -dbhost orion_mongo
+
+volumes:
+  orion_mongo_db:
+  orion_mongo_configdb:
+
+networks:
+  orion_net:
+    driver: bridge
+  fiware_net:
+    external: true
+
