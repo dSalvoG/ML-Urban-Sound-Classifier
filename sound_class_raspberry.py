@@ -22,9 +22,9 @@ def print_class(parent_dir, sub_dirs):
     predicted_proba_vector = model.predict_proba(features) 
     predicted_proba = predicted_proba_vector[0]
     for i in range(len(predicted_proba)): 
-        print(i)
+        # print(i)
         print(class_names[i], "\t\t : ", format(predicted_proba[i], '.32f') )
-    return predicted_proba
+    return predicted_proba, class_names[predicted_vector[0]]
     
 
 
@@ -40,51 +40,92 @@ class_names = ['Air Conditioner', 'Car Horn', 'Children Playing', 'Dog Bark',
 parent_dir = 'audio'
 sub_dirs= ['input']
 
-predicted = print_class(parent_dir,sub_dirs)  
+predicted, classP = print_class(parent_dir,sub_dirs)  
 
 duration = datetime.now() - start
 print('\n')
 print("Classification Duration: ", duration, '\n')
-# print(format(predicted[1], '.32f'))
+print(format(predicted[1], '.32f'))
+print("The predicted class is (V2):", classP, '\n')
 
 import json
 
-# # passing data classification to json format
-# data_set = {
-#     "Air Conditioner": predicted[0],
-#     "Car Horn": predicted[1],
-#     "Children Playing": predicted[2],
-#     "Dog Bark": predicted[3],
-#     "Drilling": predicted[4],
-#     "Engine Idling": predicted[5],
-#     "Gun Shot": predicted[6],
-#     "Jackhammer": predicted[7],
-#     "Siren": predicted[8],
-#     "Street Music": predicted[9]
-# }
+# passing data classification to json format
 
-# json_dump = json.dumps(data_set)
+data = {	
+	"noiseClass": {
+		"type": "Property",
+		"value": classP
+	},
+	
+	"airConditioner":{
+		"type": "Property",
+		"value": str(predicted[0])
+    },
 
-# ## Making a POST request to Orion Broker
-# import requests
+    "carHorn": {
+    	"type": "Property",
+    	"value": str(predicted[1])
+    },
 
-# # defining the api-endpoint
-# API_ENDPOINT = ""
+    "childrenPlaying":{
+    	"type": "Property",
+    	"value": str(predicted[2])
+    },
 
-# # headers
-# headers_string={
-#     'somekey':'somevalue',
-#     'somekey':'somevalue'
-#     }
+    "dogBark": {
+    	"type": "Property",
+    	"value": str(predicted[3])
+    },
 
-# # data to be sent to api
-# payload = {
-#     'somekey':'somevalue',
-#     'somekey':'somevalue'
-#     }
+    "Drilling": {
+    	"type": "Property",
+    	"value": str(predicted[4])
+    },
 
-# # request post (using json payload)
-# x = requests.post(url= API_ENDPOINT, json= payload, headers= headers_string,)
+    "engineIdling": {
+    	"type": "Property",
+    	"value": str(predicted[5])
+    },
 
-# #print the response text (the content of the requested file):
-# print(x.text)
+    "gunShot": {
+    	"type": "Property",
+    	"value": str(predicted[6])
+    },
+
+    "Jackhammer": {
+    	"type": "Property",
+    	"value": str(predicted[7])
+    },
+
+    "Siren": {
+    	"type": "Property",
+    	"value": str(predicted[8])
+    },
+
+    "streetMusic": {
+    	"type": "Property",
+    	"value": str(predicted[9])
+    }
+}
+
+## Making a POST request to Orion Broker
+import requests
+
+# defining the api-endpoint
+API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
+
+# headers
+headers_string={
+    'Content-Type':'application/json'
+    }
+
+# data to be sent to api
+payload = json.dumps(data)
+
+
+# request post (using json payload)
+x = requests.post(url= API_ENDPOINT, data= payload, headers= headers_string,)
+
+#print the response text (the content of the requested file):
+print(x.text)

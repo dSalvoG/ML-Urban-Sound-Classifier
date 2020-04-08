@@ -1,0 +1,84 @@
+// curl -iX POST \
+//   'http://localhost:1026/v2/entities' \
+//   -H 'Content-Type: application/json' \
+//   -d '
+{
+    "type": "Store",
+    "id": "urn:ngsi-ld:IoT:000",
+    "source": {
+        "type":"URL",
+        "value":"https://gtac.webs.upv.es/"
+    },
+    "dataProvider": {
+        "type":"URL",
+        "value":"https://gtac.webs.upv.es/"
+    },
+    "category": {
+        "type": "Text",
+        "value": "sensor"
+    },
+    "controlledProperty": {
+        "type": "Text",
+        "value": "noiseLevel"
+    },
+    "function": {
+        "type": "Text",
+        "value": "sensing"
+    },
+    // "brandName": {
+    //     "type": "Text",
+    //     "value": "noiseLevel"
+    // },
+    // "modelName": {
+    //     "type": "Text",
+    //     "value": "noiseLevel"
+    // },
+    // "manufactureName": {
+    //     "type": "Text",
+    //     "value": "noiseLevel"
+    // },
+    "name": {
+        "type":"Text",
+        "value": ""
+    },
+    // "description": {
+    //     "type":"Text",
+    //     "value": ""
+    // },
+    // "documentation": {
+    //     "type":"Text",
+    //     "value": ""
+    // },
+    // "image": {
+    //     "type":"Text",
+    //     "value": ""
+    // },
+    "address": {
+        "type": "PostalAddress",
+        "value": {
+            "streetAddress": "Camí de Vera, s/n Edificio 8G",
+            "addressRegion": "Valencia",
+            "addressLocality": "Valencia",
+            "postalCode": "46022"
+        },
+        "metadata": {
+            "verified": {
+                "type": "Boolean",
+                "value": true
+            }
+        }
+    },
+    "location": {
+        "type": "geo:json",
+        "value": {
+             "type": "Point",
+             "coordinates": [39.477861, -0.333295]
+        }
+    },
+    "dateModified": {
+
+    },
+    "dateCreated": {
+
+    }
+}'
