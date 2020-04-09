@@ -49,10 +49,25 @@ print(format(predicted[1], '.32f'))
 print("The predicted class is (V2):", classP, '\n')
 
 import json
+import datetime
+ 
+currentDT = datetime.datetime.now()
+print (str(currentDT))
+
+## Making a POST request to Orion Broker
+import requests
+
+# defining the api-endpoint
+API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
 
 # passing data classification to json format
 
 data = {	
+    "modDate": {
+		"type":"Text",
+		"value":str(currentDT)
+	},
+
 	"noiseClass": {
 		"type": "Property",
 		"value": classP
@@ -109,11 +124,6 @@ data = {
     }
 }
 
-## Making a POST request to Orion Broker
-import requests
-
-# defining the api-endpoint
-API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
 
 # headers
 headers_string={

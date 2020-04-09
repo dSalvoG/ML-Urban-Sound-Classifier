@@ -1,11 +1,15 @@
 import json
+import datetime
+ 
+currentDT = datetime.datetime.now()
+print (str(currentDT))
 
 # passing data classification to json format
 
 data = {
 	"type": "Device",
 	
-	"id": "urn:ngsi-ld:AcousticNode:001",
+	"id": "urn:ngsi-ld:AcousticNode:000",
 	
 	"source": {
 	    "type":"URL",
@@ -114,6 +118,16 @@ data = {
 	         "type": "Point",
 	         "coordinates": [39.477861, -0.333295]
 	    }
+	},
+
+	"creDate": {
+		"type":"Text",
+		"value":str(currentDT)
+	},
+
+	"modDate": {
+		"type":"Text",
+		"value":str(currentDT)
 	}
 }
 
