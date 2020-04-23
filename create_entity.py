@@ -9,7 +9,7 @@ print (str(currentDT))
 data = {
 	"type": "Device",
 	
-	"id": "urn:ngsi-ld:AcousticNode:000",
+	"id": "urn:ngsi-ld:AcousticNode:001",
 	
 	"source": {
 	    "type":"URL",
@@ -139,7 +139,9 @@ API_ENDPOINT = "http://localhost:1026/v2/entities/"
 
 # headers
 headers_string={
-    'Content-Type':'application/json'
+    'Content-Type':'application/json',
+	'fiware-service':'openiot',
+    'fiware-servicepath':'/'
     }
 
 # data to be sent to api

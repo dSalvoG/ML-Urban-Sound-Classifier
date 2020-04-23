@@ -58,7 +58,7 @@ print (str(currentDT))
 import requests
 
 # defining the api-endpoint
-API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
+API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:001/attrs"
 
 # passing data classification to json format
 
@@ -127,7 +127,9 @@ data = {
 
 # headers
 headers_string={
-    'Content-Type':'application/json'
+    'Content-Type':'application/json',
+    'fiware-service':'openiot',
+    'fiware-servicepath':'/'
     }
 
 # data to be sent to api
