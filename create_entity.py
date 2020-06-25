@@ -1,3 +1,6 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 import json
 import datetime
  

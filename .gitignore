@@ -1,6 +1,7 @@
 # Folders #
 ###################
-/audio
+/audio_LOAD
+/old
 
 # Compiled source #
 ###################
@@ -10,6 +11,11 @@
 *.exe
 *.o
 *.so
+
+# Files #
+#########
+cpu_monitor.py
+
 
 # Packages #
 ############
