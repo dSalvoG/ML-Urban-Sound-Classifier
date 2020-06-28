@@ -58,7 +58,7 @@ print (str(currentDT))
 import requests
 
 # defining the api-endpoint
-API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:001/attrs"
+API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:100/attrs"
 
 # passing data classification to json format
 
@@ -69,57 +69,57 @@ data = {
 	},
 
 	"noiseClass": {
-		"type": "Property",
+		"type": "Text",
 		"value": classP
 	},
 	
 	"airConditioner":{
-		"type": "Property",
+		"type": "Number",
 		"value": str(predicted[0])
     },
 
     "carHorn": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[1])
     },
 
     "childrenPlaying":{
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[2])
     },
 
     "dogBark": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[3])
     },
 
     "Drilling": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[4])
     },
 
     "engineIdling": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[5])
     },
 
     "gunShot": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[6])
     },
 
     "Jackhammer": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[7])
     },
 
     "Siren": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[8])
     },
 
     "streetMusic": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": str(predicted[9])
     }
 }

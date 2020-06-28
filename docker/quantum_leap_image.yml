@@ -1,0 +1,96 @@
+version: '3.3'
+
+services:
+  # Orion Context Broker
+  orion:
+    image: fiware/orion
+    hostname: orion
+    container_name: fiware-orion
+    depends_on:
+      - mongo-db
+    networks:
+      - fiware_orion_net
+    ports:
+      - "1026:1026"
+    command: -dbhost mongo-db -logLevel DEBUG -noCache
+    healthcheck:
+      test: curl --fail -s http://orion:1026/version || exit 1
+  
+  # Monitorizacion utilizando Grafana
+  grafana:
+    image: grafana/grafana
+    depends_on:
+        - crate-db
+    ports:
+        - "3003:3000"
+    environment:
+        - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-worldmap-panel
+    networks:
+      - fiware_grafana_net
+    volumes:
+      - type: volume
+        source: vol_grafana-conf
+        target: /var/lib/grafana
+  # Quantum Leap is persisting Short Term History to Crate-DB
+  quantumleap:
+    image: smartsdk/quantumleap
+    container_name: fiware-quantumleap
+    ports:
+      - "8668:8668"
+    networks:
+      - fiware_grafana_net
+      - fiware_orion_net
+    depends_on:
+      - crate-db
+      - orion
+      - mongo-db
+    environment:
+      - "CRATE_HOST=http://crate-db"
+    healthcheck:
+      test: curl --fail -s http://localhost:8668/v2/version || exit 1
+
+  # MONGO DB solo para servicio de Orion
+  mongo-db:
+    image: mongo:3.6
+    hostname: mongo-db
+    container_name: db-mongo
+    ports:
+      - "27017:27017"
+    command: --bind_ip_all --smallfiles
+    networks:
+      - fiware_orion_net
+    volumes:
+      - type: volume
+        source: vol_mongo-db
+        target: /data
+    
+  # Crate para utilizar Grafana  
+  crate-db:
+    image: crate:3.3.2
+    hostname: crate-db
+    container_name: db-crate
+    ports:
+      # Admin UI
+      - "4200:4200"
+      # Transport protocol
+      - "4300:4300"
+   # command: crate -Clicense.enterprise=false -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    networks:
+      - fiware_grafana_net
+    command: -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    volumes:
+      - type: volume
+        source: vol_crate-db
+        target: /data
+
+# Redes
+networks:
+  fiware_orion_net:
+  fiware_grafana_net:
+
+# Volumenes para persistir la data.
+volumes:
+
+  vol_mongo-db:
+  vol_crate-db:
+  vol_grafana-conf:
