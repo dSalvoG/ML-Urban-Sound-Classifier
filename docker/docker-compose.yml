@@ -1,0 +1,104 @@
+version: '3.5'
+
+services:
+  # Orion Context Broker
+  orion:
+    image: fiware/orion:2.4.0
+    hostname: orion
+    container_name: orion
+    depends_on:
+      - orion_mongo
+    networks:
+      - fiware_orion_net
+    ports:
+      - "1026:1026"
+    command: -dbhost orion_mongo -noCache
+    healthcheck:
+      test: curl --fail -s http://127.0.0.1:1026/version || exit 1
+  
+  # Monitorizacion utilizando Grafana
+  grafana:
+    image: grafana/grafana:7.0.4
+    container_name: grafana
+    depends_on:
+        - cratedb
+    ports:
+        - "3000:3000"
+    environment:
+        - GF_INSTALL_PLUGINS=https://github.com/orchestracities/grafana-map-plugin/archive/master.zip;grafana-map-plugin,grafana-clock-panel,grafana-worldmap-panel
+    networks:
+      - fiware_grafana_net
+    volumes:
+      - type: volume
+        source: grafana_storage
+        target: /var/lib/grafana
+        
+  # Quantum Leap is persisting Short Term History to Crate-DB
+  quantumleap:
+    image: smartsdk/quantumleap
+    hostname: quantumleap
+    container_name: quantumleap
+    ports:
+      - "8668:8668"
+    networks:
+      - fiware_grafana_net
+      - fiware_orion_net
+    depends_on:
+      - cratedb
+      - orion
+      - orion_mongo
+    environment:
+      - "CRATE_HOST=http://cratedb"
+    healthcheck:
+      test: curl --fail -s http://127.0.0.1:8668/version || exit 1
+
+  # MONGO DB solo para servicio de Orion
+  orion_mongo:
+    image: mongo:3.6
+    container_name: orion_mongo
+    hostname: orion_mongo
+    expose:
+      - "27017"
+    volumes:
+      - type: volume
+        source: orion_mongo_db
+        target: /data/db
+        read_only: false
+      - type: volume
+        source: orion_mongo_configdb
+        target: /data/configdb
+        read_only: false
+    networks:
+      - fiware_orion_net
+  
+  # Crate para utilizar Grafana  
+  cratedb:
+    image: crate:4.1
+    hostname: cratedb
+    container_name: cratedb
+    ports:
+      # Admin UI
+      - "4200:4200"
+      # Transport protocol
+      - "4300:4300"
+      - "5432:5432"
+   # command: crate -Clicense.enterprise=false -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    networks:
+      - fiware_grafana_net
+    command: -Cdiscovery.type=single-node -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    volumes:
+      - type: volume
+        source: crate_db_storage
+        target: /data
+
+# Redes
+networks:
+  fiware_orion_net:
+  fiware_grafana_net:
+
+# Volumenes para persistir la data.
+volumes:
+  orion_mongo_db:
+  orion_mongo_configdb:
+  crate_db_storage:
+  grafana_storage:

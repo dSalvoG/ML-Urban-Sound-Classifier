@@ -21,7 +21,7 @@ services:
     restart: always
 
   orion:
-    image: fiware/orion:2.3.0
+    image: fiware/orion
     container_name: orion
     hostname: orion
     ports:
@@ -29,7 +29,7 @@ services:
     # expose:
     #   - "1026"
     networks:
-      - fiware_net
+      # - fiware_net
       - orion_net
     restart: always
     depends_on:
@@ -43,6 +43,6 @@ volumes:
 networks:
   orion_net:
     driver: bridge
-  fiware_net:
-    external: true
+  # fiware_net:
+  #   external: true
 

@@ -10,9 +10,10 @@ import librosa
 
 import numpy as np
 
+from datetime import datetime 
+
 
 def get_stream(audio, window_size): # fix the audio data size up to 3s (512*128frames=65536)
-    
     if audio.shape[0] < window_size:
         padding = np.zeros(window_size-audio.shape[0])
         stream = np.concatenate((audio,padding), axis=0)
@@ -23,6 +24,8 @@ def get_stream(audio, window_size): # fix the audio data size up to 3s (512*128f
     return stream
 
 def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 128):
+    # LOAD
+    start_load = datetime.now()
     window_stream = 512 * (frames - 1) 
     log_specgrams = []
     labels = []
@@ -31,6 +34,13 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
             sound_clip,s = librosa.load(fn)
             label = fn.split('-')[3]
             stream = get_stream(sound_clip,window_stream)
+
+            stop_load = datetime.now() - start_load
+            print('Load time: ', stop_load)
+
+
+            # FEATURING
+            start_feat = datetime.now()
 
             melspec = librosa.feature.melspectrogram(stream, sr=s, win_length=512, n_mels = bands)
             logspec = librosa.power_to_db(melspec, ref=np.max)
@@ -42,6 +52,11 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     features = np.concatenate((log_specgrams, np.zeros(np.shape(log_specgrams))), axis = 3)
     for i in range(len(features)):
         features[i, :, :, 1] = librosa.feature.delta(features[i, :, :, 0])
+    
+    stop_feat = datetime.now() - start_feat
+    print('Feat time: ', stop_feat)
+
+
     
     return np.array(features), np.array(labels,dtype = np.int)
 

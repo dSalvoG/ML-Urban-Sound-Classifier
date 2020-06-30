@@ -1,3 +1,6 @@
+# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
+# Author: David Salvo Gutiérrez
+
 import json
 import datetime
  
@@ -9,7 +12,7 @@ print (str(currentDT))
 data = {
 	"type": "Device",
 	
-	"id": "urn:ngsi-ld:AcousticNode:001",
+	"id": "urn:ngsi-ld:AcousticNode:100",
 	
 	"source": {
 	    "type":"URL",
@@ -32,57 +35,57 @@ data = {
 	},
 	
 	"noiseClass": {
-		"type": "Property",
+		"type": "Text",
 		"value": "Unknown"
 	},
 	
 	"airConditioner":{
-		"type": "Property",
+		"type": "Number",
 		"value": "Unknown"
     },
 
     "carHorn": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "childrenPlaying":{
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "dogBark": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "Drilling": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "engineIdling": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "gunShot": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "Jackhammer": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "Siren": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 
     "streetMusic": {
-    	"type": "Property",
+    	"type": "Number",
     	"value": "Unknown"
     },
 	
