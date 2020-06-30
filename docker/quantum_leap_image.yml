@@ -18,7 +18,11 @@ services:
   
   # Monitorizacion utilizando Grafana
   grafana:
+<<<<<<< HEAD
     image: grafana/grafana:6.1.6
+=======
+    image: grafana/grafana
+>>>>>>> fa88564dc6d0f53e98f85f458b73792a8c6cacec
     depends_on:
         - crate-db
     ports:
@@ -31,10 +35,16 @@ services:
       - type: volume
         source: vol_grafana-conf
         target: /var/lib/grafana
+<<<<<<< HEAD
         
   # Quantum Leap is persisting Short Term History to Crate-DB
   quantumleap:
     image: smartsdk/quantumleap:0.7.5
+=======
+  # Quantum Leap is persisting Short Term History to Crate-DB
+  quantumleap:
+    image: smartsdk/quantumleap
+>>>>>>> fa88564dc6d0f53e98f85f458b73792a8c6cacec
     container_name: fiware-quantumleap
     ports:
       - "8668:8668"
@@ -67,7 +77,11 @@ services:
     
   # Crate para utilizar Grafana  
   crate-db:
+<<<<<<< HEAD
     image: crate:3.3.5
+=======
+    image: crate:3.3.2
+>>>>>>> fa88564dc6d0f53e98f85f458b73792a8c6cacec
     hostname: crate-db
     container_name: db-crate
     ports:
