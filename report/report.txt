@@ -1,0 +1,10 @@
+
+The predicted class is:Dog Bark
+Timestamp:2020-07-06 12:55:28.626000
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-07-06 12:55:58.980015
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-07-06 12:57:49.851060
+---------------------------------------------

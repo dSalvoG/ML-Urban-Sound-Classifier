@@ -12,7 +12,7 @@ print (str(currentDT))
 data = {
 	"type": "Device",
 	
-	"id": "urn:ngsi-ld:AcousticNode:100",
+	"id": "urn:ngsi-ld:AcousticNode:001",
 	
 	"source": {
 	    "type":"URL",
@@ -119,8 +119,13 @@ data = {
 	    "type": "geo:json",
 	    "value": {
 	         "type": "Point",
-	         "coordinates": [39.477861, -0.333295]
+	         "coordinates": [39.477313, -0.335811]
 	    }
+	},
+
+	"Geohash": {
+	    "type": "Text",
+	    "value": "ezpb86ekp"
 	},
 
 	"creDate": {
