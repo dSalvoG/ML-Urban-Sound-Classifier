@@ -1,9 +1,7 @@
 # Folders #
 ###################
-/audio_LOAD
-/old
-/detection
-/mat
+/audio
+/SSEnCE_v2
 
 # Compiled source #
 ###################
@@ -13,11 +11,6 @@
 *.exe
 *.o
 *.so
-
-# Files #
-#########
-cpu_monitor.py
-
 
 # Packages #
 ############

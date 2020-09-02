@@ -23,7 +23,7 @@ services:
     depends_on:
         - cratedb
     ports:
-        - "3000:3000"
+        - "3003:3000"
     environment:
         - GF_INSTALL_PLUGINS=https://github.com/orchestracities/grafana-map-plugin/archive/master.zip;grafana-map-plugin,grafana-clock-panel,grafana-worldmap-panel
     networks:

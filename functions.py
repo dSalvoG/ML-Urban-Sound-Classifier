@@ -28,11 +28,11 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     start_load = datetime.now()
     window_stream = 512 * (frames - 1) 
     log_specgrams = []
-    labels = []
+    # labels = []
     for l, sub_dir in enumerate(sub_dirs):
         for fn in glob.glob(os.path.join(os.path.abspath(parent_dir),sub_dir,file_ext)):
             sound_clip,s = librosa.load(fn)
-            label = fn.split('-')[3]
+            # label = fn.split('-')[3]
             stream = get_stream(sound_clip,window_stream)
 
             stop_load = datetime.now() - start_load
@@ -46,7 +46,7 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
             logspec = librosa.power_to_db(melspec, ref=np.max)
             logspec = logspec.T.flatten()[:, np.newaxis].T
             log_specgrams.append(logspec)
-            labels.append(label)
+            # labels.append(label)
             
     log_specgrams = np.asarray(log_specgrams).reshape(len(log_specgrams),bands,frames,1)
     features = np.concatenate((log_specgrams, np.zeros(np.shape(log_specgrams))), axis = 3)
@@ -57,6 +57,6 @@ def extract_features(parent_dir,sub_dirs,file_ext="*.wav",bands = 128, frames = 
     print('Feat time: ', stop_feat)
 
 
-    
-    return np.array(features), np.array(labels,dtype = np.int)
+    # return np.array(labels,dtype = np.int)
+    return np.array(features)
 

@@ -1,8 +1,42 @@
-# Urban Sound Classification with CNN on Raspberry Pi Model 3
+# Urban Sound Classification with CNN on Raspberry Pi Model 3 and Windows 10
 
 Author: David Salvo Gutiérrez
 
 Work Group: GTAC-iTEAM (Universitat Politècnica de València)
+
+# Environment Project Set Up
+## Windows 10 installations
+We will train and test our model on the PC first. We used windows 10 for Dell XPS 15 Lapto, which we used to train and test de classification model. To set-up the windows 10 lapto we must install Python 3.6 version environment and its libraries, for this project. To make things simple, we used Anaconda as a Python Framework to work with this environment.
+
+1. Install Anaconda 3.8 (https://www.anaconda.com/products/individual)
+2. Create a virtual environment into Anaconda Prompt for Tensorflow. 
+3. (open anaconda prompt, user example) 
+    1. C:\Users\sglvladi> conda create -n tensorflow pip python=3.8
+    2. C:\Users\sglvladi> conda activate tensorflow
+    3. (tensorflow) C:\Users\sglvladi>
+4. Install all dependecies needed for our project into the virtual environment.
+    1. (tensorflow) C:\Users\sglvladi> pip install tensorflow
+    2. (tensorflow) C:\Users\sglvladi> pip install pandas
+    3. (tensorflow) C:\Users\sglvladi> pip install keras
+    4. (tensorflow) C:\Users\sglvladi> pip install jupyterlab
+    5. (tensorflow) C:\Users\sglvladi> pip install numpy
+    6. (tensorflow) C:\Users\sglvladi> pip install librosa
+    7. (tensorflow) C:\Users\sglvladi> deactivate tensorflow #(virtual env exit)
+
+## Windows 10 Set-Up
+Once we install all software environment needed for this project, just choose your operation IDE. We could use Jupyter Lab to interactively program our Classification Model our we can use Common User IDE as Visual Studio Code. In our case we use both of them, at the beginning it would be very useful to use Jupyter Lab in order to understand correctly the code below, and the we use VSC to fastly organize and program all project scripts needed.
+
+If we want to use Jupyter Lab, just activate previous virtual env.
+
+1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
+    1. (tensorflow) C:\Users\sglvladi> jupyterlab
+
+The Jupyter Lab interface would be opened. Otherwise, just open VSC and select python interpreter (tensorflow) for VSC Open Terminal. Then you can compile and execute python scripts from the same VSC.
+
+
+## Raspberry Pi installations
+Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B.
+
 
 ## Feature extraction from sound
 ### Introduction
@@ -99,45 +133,64 @@ Once you get audio directory, you should get a directory named 'soundFeat' with 
         /ml-soundFeat    
             /soundFeat
                 /audio
-                    /fold* (1-10)
-                    /metadata
-                    /test
-                    /test_valencia_sound_dataset
-                    /train_dataset
+                    /input
+                /docker
+                    docker-compose.yml
                 /models
-                    models*.h5
+                    no*_model.h5
+                /raspberryPi
                 class_validation.py
                 cnn.py
+                create_entity.py
+                data-model.json
                 functions.py
+                pre-detection.ipynb
+                sound_class_raspberry.py
                 sound_classifier.py
                 sound_featuring.py
+                usound_classifier_part1.ipynb
+                usound_classifier_part2.ipynb
 
 ## All project directory explanation
 
 ### Audio folder specifications
-In this directory there's all audio content and features extracted used to make all train and test task to develop our urban sound classifier. The folders 'fold*' and 'metadata' are obtain from UrbanSound8K dataset, as I mentioned before. Folders 'test' 'train_dataset' and 'test_valencia_sound_dataset' are created by me specifically for this project.
+In this directory there's all audio content and features extracted used to make all train and test task to develop our urban sound classifier. Taking into account that the dataset is huge to upload them into the repository, in this repository is just indicated the directory where to leave that audio file that is going to be classify. The dataset used in this project it is UrbanSoun8K available on the web.
 
-**'test'** folder contains each feature and label extraction (tuples of feature and label) for individual 'fold' directory. Per example, file named 'feature_test1.npy' and 'labels_test1.npy' correspond to the feature and label extraction from the 'fold1' dataset using the script 'sound_featuring'.
+**'input'** in this folder we should save the audio file that we want to classify.
 
-**'train_dataset'** folder contains each feature and labe extraction for all group of nine folds from the UrbanSound8K dataset. Per example, file named 'features_no1.npy' and 'labels_no1.npy' correspond to the feature extraction from the all .wav audio file that belongs to the group of folders: fold2 up to fold10, i.e. all folds except the one.
+### Other folders specifications
 
-**'UrbanSound_Valencia_dataset'** it contains urban audio files with the same characteristics like the UrbanSound8K dataset, recorded in the city of Valencia, Spain.
+**'docker'** In this folder the doker-compose image is stored in which all the services that need to be deployed are specified in which it is used as a server to be able to instantiate the network designed for this project. This image must be displayed on that device that will act as a network server, since it specifies all the services necessary for its correct operation.
 
-**'test_valencia_dataset'** it contains feature and label extraction from the urban sound dataset created for this project, recording urban sound of the Valencia city, in Spain.
+**'models'** This folder stores the already trained and validated model that will be imported into the classifier script in order to perform the classification.
+
+**'raspberryPi'** This folder stores the entire directory that must be implemented within those sensor nodes (Raspberry Pi) that are going to be instantiated as classifiers within the network. This folder must be copied exactly to the Raspberry Pi that will be used as a classifier sensor, and the main.py file will be executed to launch its service.
 
 ### Script files specifications
 
 In this project you would find differents python scripts in orther to deploy a functional urban sound classifier over a Raspberry Pi Model 3. I would explain the content and utility of each python scrip used in this folder.
 
-**functions:** in this file you would fine the functions used to extract features and label from an audio file (.wav extension).
-
-**sound_featuring:** in this script you would fine the implementation of the extraction of the features and label from an specific set of audio files.
-
-**sound_classifier:** in this script you would fine the script to implement into a Raspberry Pi to classifie new audio inputs, using a trained model, that you would fine in the script cnn in wich you could train new models.
+**class_validation:** in this script you would fine a function to test the model trained and imported with new input data getting the classification % for each class.
 
 **cnn:** in this script you would fine the implementation of an cnn model and the resources needed for train an test the model.
 
-**class_validation:** in this script you would fine a function to test the model trained and imported with new input data getting the classification % for each class.
+**create_entity:** a new data entity is created in this file and sent to the Orion broker as indicated by the IP address of the server where the broker is hosted.
+
+**data_model(JSON):** This .json file specifies the data structure to be used for each entity on the network.
+
+**functions:** in this file you would fine the functions used to extract features and label from an audio file (.wav extension).
+
+**pre-detection (NOTEBOOK):** in this jupyter notebook the study carried out to determine the necessary audio filters to create a pre-detection filter is specified.
+
+**sound_class_raspberry:** This is the main file of the project. This file is the one used to test the correct operation of the system. This file contains all the tasks of obtaining an audio fragment already recorded, its classification and sending it to the broker. It remains to specify in this file the function of capturing audio through the micro since this function is only implemented in those devices that will act as sensors (Raspberry Pi).
+
+**sound_classifier:** in this script you would fine the script to implement into a Raspberry Pi to classifie new audio inputs, using a trained model, that you would fine in the script cnn in wich you could train new models.
+
+**sound_featuring:** in this script you would fine the implementation of the extraction of the features and label from an specific set of audio files.
+
+**usound_classifier_part1 (NOTEBOOK):** This jupyter notebook represents the study and obtaining of characteristics that is carried out in this project in order to train the neural network according to the urban sound classifier that you want to design.
+
+**usound_classifier_part2 (NOTEBOOK):** This jupyter notebook specifies the CNN training, testing and validation phase that constitutes the project classifier. This way you can follow in a more interactive way than following the source code of the python scripts.
 
 # Stand up the project
 

@@ -1,5 +1,10 @@
-# UNIVERSITAT POLITÉCNICA DE VALÉNCIA
-# Author: Gema Piñero, David Salvo Gutiérrez
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jun  3 18:15:39 2020
+
+@author: gemapinero
+"""
 
 # Mirar
 # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.sosfilt.html#scipy.signal.sosfilt

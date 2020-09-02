@@ -12,7 +12,7 @@ print (str(currentDT))
 data = {
 	"type": "Device",
 	
-	"id": "urn:ngsi-ld:AcousticNode:001",
+	"id": "urn:ngsi-ld:AcousticNode:000",
 	
 	"source": {
 	    "type":"URL",

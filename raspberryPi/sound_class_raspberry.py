@@ -2,8 +2,8 @@
 # Author: David Salvo Gutiérrez
 
 # # LOAD MODELS RASPBERRY PI
-import time
-import datetime 
+from datetime import datetime 
+start = datetime.now()
 
 import tensorflow as tf
 
@@ -11,14 +11,6 @@ from tensorflow.keras import models
 import numpy as np
 
 from functions import extract_features
-
-#DANI EMPIEZA AQUI
-#
-#
-#
-#
-#
-#DANI ACABA AQUI
 
 def print_class(parent_dir, sub_dirs):
     features = extract_features(parent_dir,sub_dirs)
@@ -39,7 +31,6 @@ def print_class(parent_dir, sub_dirs):
     report_file.write("---------------------------------------------" + "\n")
     report_file.close()
     return predicted_proba, class_names[predicted_vector[0]]
-    
 
 
 # LOAD PRE-TRAINED MODEL
@@ -50,9 +41,6 @@ model = tf.keras.models.load_model('models/no10_model.h5')
 class_names = ['Air Conditioner', 'Car Horn', 'Children Playing', 'Dog Bark', 
                'Drilling', 'Engine Idling', 'Gun Shot', 
                'Jackhammer', 'Siren', 'Street Music']
-
-# Open report file
-report_file = open("report/report.txt","a")
 
 parent_dir = 'audio'
 sub_dirs= ['input']
