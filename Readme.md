@@ -48,7 +48,7 @@ If the image has been correctly instantiated and the services deployed, we shoul
 | 28c98df320c5 | fiware/orion:2.4.0  | "/usr/bin/contextBro…"  | 12 days ago  | Up 34 seconds (healthy)  | 0.0.0.0:1026->1026/tcp  | orion  |
 | 022b1dd94129  | grafana/grafana:7.0.4  | "/run.sh"  | 12 days ago  | Up 34 seconds  | 0.0.0.0:3003->3000/tcp  | grafana  |
 | 7197a1e0e0cd  | mongo:3.6    | "docker-entrypoint.s…"  | 12 days ago  | Up 35 seconds  | 27017/tcp  | orion_mongo  |
-| ec31b31f58aa  | crate:4.1    | "/docker-entrypoint.…"  | 12 days ago  | Up 35 seconds  | 0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp  | ec31b31f58aa        crate:4.1               "/docker-entrypoint.…"   12 days ago         Up 35 seconds             0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp   cratedb
+| ec31b31f58aa  | crate:4.1    | "/docker-entrypoint.…"  | 12 days ago  | Up 35 seconds  | 0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp  | cratedb
   |
 
 Once the network services have been initialized, the correct operation of the classifier can be checked by executing the main system script "sound_class_raspbery.py". From the terminal, and within the anaconda environment that we had executed, we go to the project directory where the script is located and we execute it. Automatically, from this script it will classify the first .waw audio file that has been housed in the / audio / input folder, the result will be classified on the terminal and it will automatically send the changes made to the specified broker entity to the server.
