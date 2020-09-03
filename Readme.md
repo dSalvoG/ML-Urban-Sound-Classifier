@@ -56,6 +56,8 @@ Once the network services have been initialized, the correct operation of the cl
 1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
     1. (tensorflow) C:\Users\sglvladi> python sound_class_raspberry.py (we execute the main scipt to get the audio in input folder classfied)
 
+| Class  | Classification Index |
+| ------------- | ------------- |
 | Air Conditioner  | 0.00039507733890786767005920410156 |
 | Car Horn   | 0.00009643898374633863568305969238  |
 | Children Playing  | 0.04054668918251991271972656250000  |
