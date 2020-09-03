@@ -1,6 +1,7 @@
 # Urban Sound Classification with CNN on Raspberry Pi Model 3 and Windows 10
 
 Author: David Salvo Gutiérrez
+
 Co-Author: Daniel Sanz Montrull
 
 Work Group: GTAC-iTEAM (Universitat Politècnica de València)
