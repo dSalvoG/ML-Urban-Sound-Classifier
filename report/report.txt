@@ -1,0 +1,219 @@
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Siren
+Air Conditioner   4.1301043e-28
+Car Horn   1.4115954e-21
+Children Playing   1.9481213e-05
+Dog Bark   7.736021e-12
+Drilling   4.9415577e-10
+Engine Idling   1.8838387e-18
+Gun Shot   0.0
+Jackhammer   1.6561655e-17
+Siren   0.9851659
+Street Music   0.014814571
+---------------------------------------------
+Siren
+Air Conditioner   2.1218083e-17
+Car Horn   1.3811144e-16
+Children Playing   0.011496017
+Dog Bark   6.849845e-05
+Drilling   7.287641e-10
+Engine Idling   2.64149e-09
+Gun Shot   1.160077e-24
+Jackhammer   1.5858548e-09
+Siren   0.83122665
+Street Music   0.15720889
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Dog Bark
+Air Conditioner   1.5756417e-05
+Car Horn   4.2458077e-12
+Children Playing   0.016461022
+Dog Bark   0.9832841
+Drilling   3.1757359e-06
+Engine Idling   8.9888135e-06
+Gun Shot   3.6117206e-06
+Jackhammer   1.6704807e-07
+Siren   7.996131e-09
+Street Music   0.00022327712
+---------------------------------------------
+Siren
+Air Conditioner   4.102665e-22
+Car Horn   3.9460913e-17
+Children Playing   7.273525e-16
+Dog Bark   2.4958915e-08
+Drilling   3.4877524e-20
+Engine Idling   1.2954249e-15
+Gun Shot   0.0
+Jackhammer   2.2661792e-17
+Siren   0.6301125
+Street Music   0.36988747
+---------------------------------------------
+Siren
+Air Conditioner   2.0433963e-26
+Car Horn   1.4764821e-18
+Children Playing   1.1380568e-11
+Dog Bark   6.9421127e-09
+Drilling   1.8051505e-17
+Engine Idling   3.615371e-15
+Gun Shot   0.0
+Jackhammer   8.1961605e-20
+Siren   0.9909281
+Street Music   0.009071863
+---------------------------------------------
+Children Playing
+Air Conditioner   5.9115085e-17
+Car Horn   4.496502e-09
+Children Playing   0.4518874
+Dog Bark   0.0048089586
+Drilling   0.1426689
+Engine Idling   1.926977e-09
+Gun Shot   2.0933097e-17
+Jackhammer   3.6132337e-07
+Siren   0.39211303
+Street Music   0.008521298
+---------------------------------------------
+Siren
+Air Conditioner   2.7918718e-13
+Car Horn   4.1854823e-12
+Children Playing   0.0103697125
+Dog Bark   2.4484493e-08
+Drilling   1.36398275e-14
+Engine Idling   5.110569e-10
+Gun Shot   5.2779566e-22
+Jackhammer   1.9224273e-18
+Siren   0.9895783
+Street Music   5.195049e-05
+---------------------------------------------
+Children Playing
+Air Conditioner   2.4498773e-08
+Car Horn   8.32379e-08
+Children Playing   0.99861825
+Dog Bark   2.586518e-06
+Drilling   0.0005977743
+Engine Idling   3.795941e-09
+Gun Shot   6.9066454e-11
+Jackhammer   1.0534038e-06
+Siren   1.9770619e-08
+Street Music   0.0007802203
+---------------------------------------------
+Dog Bark
+Air Conditioner   2.2588983e-05
+Car Horn   4.0284717e-06
+Children Playing   0.20206986
+Dog Bark   0.72558534
+Drilling   0.057984304
+Engine Idling   0.00064602593
+Gun Shot   3.4244326e-07
+Jackhammer   9.4130955e-06
+Siren   3.0648705e-05
+Street Music   0.01364752
+---------------------------------------------
+Drilling
+Air Conditioner   2.8770573e-06
+Car Horn   0.00016526405
+Children Playing   0.023568476
+Dog Bark   0.42599478
+Drilling   0.49443704
+Engine Idling   0.005188383
+Gun Shot   7.243783e-07
+Jackhammer   0.0005655122
+Siren   0.0034454942
+Street Music   0.04663144
+---------------------------------------------
+Dog Bark
+Air Conditioner   2.6046886e-08
+Car Horn   0.0014473674
+Children Playing   0.032107305
+Dog Bark   0.49500838
+Drilling   0.0012855082
+Engine Idling   0.0002939482
+Gun Shot   2.6152794e-10
+Jackhammer   0.29809952
+Siren   0.00010832834
+Street Music   0.17164972
+---------------------------------------------
+Jackhammer
+Air Conditioner   0.000645971
+Car Horn   7.500765e-10
+Children Playing   8.290757e-09
+Dog Bark   0.0021193586
+Drilling   0.0011162688
+Engine Idling   0.00015867609
+Gun Shot   9.468341e-13
+Jackhammer   0.99595624
+Siren   7.1118467e-07
+Street Music   2.7879132e-06
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-03 11:39:22.447414
+---------------------------------------------

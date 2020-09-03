@@ -12,13 +12,13 @@ import numpy as np
 
 from functions import extract_features
 
-#DANI EMPIEZA AQUI
+# RASPBERRY RECORDING FUNC STARTS HERE
 #
 #
 #
 #
 #
-#DANI ACABA AQUI
+# RASPBERRY RECORDING FUNC ENDS HERE
 
 def print_class(parent_dir, sub_dirs):
     features = extract_features(parent_dir,sub_dirs)

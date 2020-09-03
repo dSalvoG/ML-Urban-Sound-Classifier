@@ -31,12 +31,80 @@ If we want to use Jupyter Lab, just activate previous virtual env.
 1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
     1. (tensorflow) C:\Users\sglvladi> jupyterlab
 
-The Jupyter Lab interface would be opened. Otherwise, just open VSC and select python interpreter (tensorflow) for VSC Open Terminal. Then you can compile and execute python scripts from the same VSC.
+The Jupyter Lab interface would be opened. Otherwise, just open VSC and select python interpreter (tensorflow) for VSC Open Terminal. Then you can compile and execute python scripts from the same VSC. To initialize the project, the docker image is displayed in which we have all the network services that have been implemented in this network. To do this we will follow the steps indicated below.
 
+4. First download and install docker on the PC. Once downloaded, the service is initialized and from the terminal without having to activate the anaconda environment, the services of the image found in the \docker folder are displayed.
+    1. C:\Users\sglvladi\docker> docker-compose -p FIWARE up -d 
+
+Una vez inicializados los servicios se comprueba que están en funcionamiento y escuchando en los puertos de red que se habian indicado en la image.
+
+2. C:\Users\sglvladi\docker> docker ps -a (It is not necessary to indicate with -f the name of the .yaml because by default it implements the one called docker-compose)
+
+If the image has been correctly instantiated and the services deployed, we should obtain the following result after executing the previous command:
+
+CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS                    PORTS                                                                    NAMES
+78cf2e4812b4        smartsdk/quantumleap    "/bin/sh -c 'python …"   12 days ago         Up 34 seconds (healthy)   0.0.0.0:8668->8668/tcp                                                   quantumleap
+28c98df320c5        fiware/orion:2.4.0      "/usr/bin/contextBro…"   12 days ago         Up 34 seconds (healthy)   0.0.0.0:1026->1026/tcp                                                   orion
+022b1dd94129        grafana/grafana:7.0.4   "/run.sh"                12 days ago         Up 34 seconds             0.0.0.0:3003->3000/tcp                                                   grafana
+7197a1e0e0cd        mongo:3.6               "docker-entrypoint.s…"   12 days ago         Up 35 seconds             27017/tcp                                                                orion_mongo
+ec31b31f58aa        crate:4.1               "/docker-entrypoint.…"   12 days ago         Up 35 seconds             0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp   cratedb
+
+Once the network services have been initialized, the correct operation of the classifier can be checked by executing the main system script "sound_class_raspbery.py". From the terminal, and within the anaconda environment that we had executed, we go to the project directory where the script is located and we execute it. Automatically, from this script it will classify the first .waw audio file that has been housed in the / audio / input folder, the result will be classified on the terminal and it will automatically send the changes made to the specified broker entity to the server.
+
+1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
+    1. (tensorflow) C:\Users\sglvladi> python sound_class_raspberry.py (we execute the main scipt to get the audio in input folder classfied)
+
+Air Conditioner                  :  0.00039507733890786767005920410156
+Car Horn                 :  0.00009643898374633863568305969238
+Children Playing                 :  0.04054668918251991271972656250000
+Dog Bark                 :  0.92944324016571044921875000000000
+Drilling                 :  0.00442013330757617950439453125000
+Engine Idling            :  0.00128524622414261102676391601562
+Gun Shot                 :  0.00001160400370281422510743141174
+Jackhammer               :  0.00614752527326345443725585937500
+Siren            :  0.00027761943056248128414154052734
+Street Music             :  0.01737647131085395812988281250000
+The predicted class is (V2): Dog Bark
+
+2020-09-03 11:39:22.448415
+
+In this way, if it has been executed correctly, the following output should be obtained from the terminal. This information is the same that is sent to docker to update the entity corresponding to the device on which the script has been executed. This is intended because this script, even if the test is carried out on the server where the network has been deployed with docker (localhost), it is assumed that it will be executed on those remote sensors that must send and connect to the broker through the server's ip where the docker image is deployed. The end label in the capture after execution that appears after the result of the classification is the timestamp that indicates that the broker data and the entity to which it belongs has been sent correctly.
 
 ## Raspberry Pi installations
-Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B.
+Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B. The installation of the environment that has been used for this project presents its complexity in the compatibility of versions of tensorflow and keras in Raspberry Pi as well as the correct installation of the Librosa library in this device, since it presents common problems with dependencies such as llvmlite and numba . To correctly install these dependencies, the Berryconda tool has been used, which pre-compiles these libraries, simplifying their installation on the Raspberry Pi without the need to resort to a source installation. The procedure followed is as follows:
 
+1. Instalar Berryconda (https://github.com/jjhelmus/berryconda) (modo administrador directorio (/root/berryconda3).pip
+    1. chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
+    2. ./Berryconda3-2.0.0-Linux-armv7l.sh
+2. Instalar Numba and llvmlite para Librosa
+    1. conda install -c numba numba
+    2. reboot
+3. Instalar dependencias
+    1. sudo apt-get update
+    2. sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev      libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev
+    3. sudo apt-get install libatlas-base-dev python3-numpy libblas-dev liblapack-dev python3-dev gfortran python3-setuptools python3-scipy
+
+4. Una vez instalados, instalamos scikit-learn y scipy
+    1. conda install scikit-learn
+    2. reboot
+5. Instalamos Librosa
+    1. pip install librosa (FUNCIONA)
+    2. pip list (Observamos que tenemos librosa correctamente instalado)
+6. Instalar Tensorflow y Keras
+    1. sudo apt update
+    2. sudo apt-get update
+    3. sudo apt-get install python3-h5py
+    4. pip install --upgrade pip
+    5. pip list
+    6. sudo su -
+    7. pip3 install --user --upgrade tensorflow
+    8. python3 -c 'import tensorflow as tf; print(tf.__version__)'
+    9. pip3 install keras
+7. Instalar Pandas y Numpy
+	1. pip install pandas
+	2. pip install numpy
+
+In case of error there is the other possibility of using a virtual environment either created with Berryconda or with the virtualenv library. In this case, virtualenv would be installed in case of not having it or the virtual environment would be created with conda. To create the environment, it is initialized for version 3.7 of python and then the rest of the necessary libraries for the environment we are looking for are installed with pip.
 
 ## Feature extraction from sound
 ### Introduction
@@ -139,6 +207,7 @@ Once you get audio directory, you should get a directory named 'soundFeat' with 
                 /models
                     no*_model.h5
                 /raspberryPi
+                /report
                 class_validation.py
                 cnn.py
                 create_entity.py
@@ -264,7 +333,7 @@ CASE 1: If you want to test the model with one of the folds you dind't use on tr
     # LOAD PRE-TRAINED MODEL
     model = tf.keras.models.load_model('models/no1_model.h5')
 
-CASE 2: If you want to classify a new input audio, that is not classify, i.e. It has not asigned a label, you would need to use the script *class_validation.npy* in wich you would get the classification decision importing the model trained and indicating the directory path where it is saved the audio files (.wav) to be classify.
+CASE 2: If you want to classify a new input audio, that is not classify, i.e. It has not asigned a label, you would need to use the script *class_validation.py* in wich you would get the classification decision importing the model trained and indicating the directory path where it is saved the audio files (.wav) to be classify. O directly you can use the main script to classify and send the result to the ner, by *sound_class_raspberry.py*
 
 
 
