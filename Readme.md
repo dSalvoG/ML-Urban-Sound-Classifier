@@ -42,31 +42,32 @@ Una vez inicializados los servicios se comprueba que están en funcionamiento y 
 
 If the image has been correctly instantiated and the services deployed, we should obtain the following result after executing the previous command:
 
-CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS                    PORTS                                                                    NAMES
-78cf2e4812b4        smartsdk/quantumleap    "/bin/sh -c 'python …"   12 days ago         Up 34 seconds (healthy)   0.0.0.0:8668->8668/tcp                                                   quantumleap
-28c98df320c5        fiware/orion:2.4.0      "/usr/bin/contextBro…"   12 days ago         Up 34 seconds (healthy)   0.0.0.0:1026->1026/tcp                                                   orion
-022b1dd94129        grafana/grafana:7.0.4   "/run.sh"                12 days ago         Up 34 seconds             0.0.0.0:3003->3000/tcp                                                   grafana
-7197a1e0e0cd        mongo:3.6               "docker-entrypoint.s…"   12 days ago         Up 35 seconds             27017/tcp                                                                orion_mongo
-ec31b31f58aa        crate:4.1               "/docker-entrypoint.…"   12 days ago         Up 35 seconds             0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp   cratedb
+| First Header  | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| 78cf2e4812b4 | smartsdk/quantumleap  | "/bin/sh -c 'python …"  | 12 days ago  | Up 34 seconds (healthy)  | 0.0.0.0:8668->8668/tcp  | quantumleap  |
+| 28c98df320c5 | fiware/orion:2.4.0  | "/usr/bin/contextBro…"  | 12 days ago  | Up 34 seconds (healthy)  | 0.0.0.0:1026->1026/tcp  | orion  |
+| 022b1dd94129  | grafana/grafana:7.0.4  | "/run.sh"  | 12 days ago  | Up 34 seconds  | 0.0.0.0:3003->3000/tcp  | grafana  |
+| 7197a1e0e0cd  | mongo:3.6    | "docker-entrypoint.s…"  | 12 days ago  | Up 35 seconds  | 27017/tcp  | orion_mongo  |
+| ec31b31f58aa  | crate:4.1    | "/docker-entrypoint.…"  | 12 days ago  | Up 35 seconds  | 0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp  | ec31b31f58aa        crate:4.1               "/docker-entrypoint.…"   12 days ago         Up 35 seconds             0.0.0.0:4200->4200/tcp, 0.0.0.0:4300->4300/tcp, 0.0.0.0:5432->5432/tcp   cratedb
+  |
 
 Once the network services have been initialized, the correct operation of the classifier can be checked by executing the main system script "sound_class_raspbery.py". From the terminal, and within the anaconda environment that we had executed, we go to the project directory where the script is located and we execute it. Automatically, from this script it will classify the first .waw audio file that has been housed in the / audio / input folder, the result will be classified on the terminal and it will automatically send the changes made to the specified broker entity to the server.
 
 1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
     1. (tensorflow) C:\Users\sglvladi> python sound_class_raspberry.py (we execute the main scipt to get the audio in input folder classfied)
 
-Air Conditioner                  :  0.00039507733890786767005920410156
-Car Horn                 :  0.00009643898374633863568305969238
-Children Playing                 :  0.04054668918251991271972656250000
-Dog Bark                 :  0.92944324016571044921875000000000
-Drilling                 :  0.00442013330757617950439453125000
-Engine Idling            :  0.00128524622414261102676391601562
-Gun Shot                 :  0.00001160400370281422510743141174
-Jackhammer               :  0.00614752527326345443725585937500
-Siren            :  0.00027761943056248128414154052734
-Street Music             :  0.01737647131085395812988281250000
-The predicted class is (V2): Dog Bark
-
-2020-09-03 11:39:22.448415
+| Air Conditioner  | 0.00039507733890786767005920410156 |
+| Car Horn   | 0.00009643898374633863568305969238  |
+| Children Playing  | 0.04054668918251991271972656250000  |
+| Dog Bark  |  0.92944324016571044921875000000000  |
+| Drilling  | 0.00442013330757617950439453125000  |
+| Engine Idling  | 0.00128524622414261102676391601562  |
+| Gun Shot   | 0.00001160400370281422510743141174  |
+| Jackhammer  |  0.00614752527326345443725585937500  |
+| Siren  |  0.00027761943056248128414154052734  |
+| Street Music  | 0.01737647131085395812988281250000  |
+| The predicted class is (V2):  | Dog Bark  |
+| 2020-09-03  | 11:39:22.448415  |
 
 In this way, if it has been executed correctly, the following output should be obtained from the terminal. This information is the same that is sent to docker to update the entity corresponding to the device on which the script has been executed. This is intended because this script, even if the test is carried out on the server where the network has been deployed with docker (localhost), it is assumed that it will be executed on those remote sensors that must send and connect to the broker through the server's ip where the docker image is deployed. The end label in the capture after execution that appears after the result of the classification is the timestamp that indicates that the broker data and the entity to which it belongs has been sent correctly.
 
