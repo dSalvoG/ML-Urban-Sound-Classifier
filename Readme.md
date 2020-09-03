@@ -69,6 +69,9 @@ Once the network services have been initialized, the correct operation of the cl
 | Siren  |  0.00027761943056248128414154052734  |
 | Street Music  | 0.01737647131085395812988281250000  |
 | The predicted class is (V2):  | Dog Bark  |
+
+| Date  | Timestamp |
+| ------------- | ------------- |
 | 2020-09-03  | 11:39:22.448415  |
 
 In this way, if it has been executed correctly, the following output should be obtained from the terminal. This information is the same that is sent to docker to update the entity corresponding to the device on which the script has been executed. This is intended because this script, even if the test is carried out on the server where the network has been deployed with docker (localhost), it is assumed that it will be executed on those remote sensors that must send and connect to the broker through the server's ip where the docker image is deployed. The end label in the capture after execution that appears after the result of the classification is the timestamp that indicates that the broker data and the entity to which it belongs has been sent correctly.
