@@ -35,12 +35,12 @@ If we want to use Jupyter Lab, just activate previous virtual env.
 
 The Jupyter Lab interface would be opened. Otherwise, just open VSC and select python interpreter (tensorflow) for VSC Open Terminal. Then you can compile and execute python scripts from the same VSC. To initialize the project, the docker image is displayed in which we have all the network services that have been implemented in this network. To do this we will follow the steps indicated below.
 
-4. First download and install docker on the PC. Once downloaded, the service is initialized and from the terminal without having to activate the anaconda environment, the services of the image found in the \docker folder are displayed.
+2. First download and install docker on the PC. Once downloaded, the service is initialized and from the terminal without having to activate the anaconda environment, the services of the image found in the \docker folder are displayed.
     1. C:\Users\sglvladi\docker> docker-compose -p FIWARE up -d 
 
 Una vez inicializados los servicios se comprueba que están en funcionamiento y escuchando en los puertos de red que se habian indicado en la image.
 
-2. C:\Users\sglvladi\docker> docker ps -a (It is not necessary to indicate with -f the name of the .yaml because by default it implements the one called docker-compose)
+3. C:\Users\sglvladi\docker> docker ps -a (It is not necessary to indicate with -f the name of the .yaml because by default it implements the one called docker-compose)
 
 If the image has been correctly instantiated and the services deployed, we should obtain the following result after executing the previous command:
 
@@ -55,7 +55,7 @@ If the image has been correctly instantiated and the services deployed, we shoul
 
 Once the network services have been initialized, the correct operation of the classifier can be checked by executing the main system script "sound_class_raspbery.py". From the terminal, and within the anaconda environment that we had executed, we go to the project directory where the script is located and we execute it. Automatically, from this script it will classify the first .waw audio file that has been housed in the / audio / input folder, the result will be classified on the terminal and it will automatically send the changes made to the specified broker entity to the server.
 
-1. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
+4. (open anaconda prompt): C:\Users\sglvladi> activate tensorflow
     1. (tensorflow) C:\Users\sglvladi> python sound_class_raspberry.py (we execute the main scipt to get the audio in input folder classfied)
 
 | Class  | Classification Index |
@@ -77,6 +77,16 @@ Once the network services have been initialized, the correct operation of the cl
 | 2020-09-03  | 11:39:22.448415  |
 
 In this way, if it has been executed correctly, the following output should be obtained from the terminal. This information is the same that is sent to docker to update the entity corresponding to the device on which the script has been executed. This is intended because this script, even if the test is carried out on the server where the network has been deployed with docker (localhost), it is assumed that it will be executed on those remote sensors that must send and connect to the broker through the server's ip where the docker image is deployed. The end label in the capture after execution that appears after the result of the classification is the timestamp that indicates that the broker data and the entity to which it belongs has been sent correctly.
+
+5. Dashboard and Database Visualization
+
+Taking into account from where you want to access to the server servicies, yo would use the IP-Server address or localhost in the case you are using the server monitor. Taking this into account you must use the ip-server address or localhost, where you deploy the docker services and the look up on the browser for the grafana service.
+
+To visualize the dashboard you must look up for thi direction on the browser:
+https://ip-server:3003 (then it would show the dashboard)
+
+To access the CrateDB database:
+https://ip-server:4200
 
 ## Raspberry Pi installations
 Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B. The installation of the environment that has been used for this project presents its complexity in the compatibility of versions of tensorflow and keras in Raspberry Pi as well as the correct installation of the Librosa library in this device, since it presents common problems with dependencies such as llvmlite and numba . To correctly install these dependencies, the Berryconda tool has been used, which pre-compiles these libraries, simplifying their installation on the Raspberry Pi without the need to resort to a source installation. The procedure followed is as follows:
