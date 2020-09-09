@@ -11,13 +11,15 @@ Work Group: GTAC-iTEAM (Universitat Politècnica de València)
 We will train and test our model on the PC first. We used windows 10 for Dell XPS 15 Lapto, which we used to train and test de classification model. To set-up the windows 10 lapto we must install Python 3.6 version environment and its libraries, for this project. To make things simple, we used Anaconda as a Python Framework to work with this environment.
 
 1. Install Anaconda 3.8 (https://www.anaconda.com/products/individual)
+2. Then as it is indicated on the official Tensorflow page, we must install Microsoft Visual C++ on windows. To take into account different SO distributions for the installation, follow the instructions indicated in the page: https://www.tensorflow.org/install/pip#windows
+3. Once it was installed Visual C++, we have to create a virtual environment as it is indicated on the following step.
 2. Create a virtual environment into Anaconda Prompt for Tensorflow. 
 3. (open anaconda prompt, user example) 
-    1. C:\Users\sglvladi> conda create -n tensorflow pip python=3.8
+    1. C:\Users\sglvladi> conda create -n tensorflow pip python=3.7  # select python version, tensorflow is the virtual env name.
     2. C:\Users\sglvladi> conda activate tensorflow
     3. (tensorflow) C:\Users\sglvladi>
 4. Install all dependecies needed for our project into the virtual environment.
-    1. (tensorflow) C:\Users\sglvladi> pip install tensorflow
+    1. (tensorflow) C:\Users\sglvladi> pip install --ignore-installed --upgrade tensorflow
     2. (tensorflow) C:\Users\sglvladi> pip install pandas
     3. (tensorflow) C:\Users\sglvladi> pip install keras
     4. (tensorflow) C:\Users\sglvladi> pip install jupyterlab

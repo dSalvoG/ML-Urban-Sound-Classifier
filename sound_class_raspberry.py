@@ -15,9 +15,6 @@ from functions import extract_features
 # RASPBERRY RECORDING FUNC STARTS HERE
 #
 #
-#
-#
-#
 # RASPBERRY RECORDING FUNC ENDS HERE
 
 def print_class(parent_dir, sub_dirs):
@@ -75,7 +72,7 @@ print (str(currentDT))
 import requests
 
 # defining the api-endpoint
-API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:001/attrs"
+API_ENDPOINT = "http://158.42.160.78:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
 
 # passing data classification to json format
 

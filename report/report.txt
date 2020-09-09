@@ -217,3 +217,21 @@ Street Music   2.7879132e-06
 The predicted class is:Dog Bark
 Timestamp:2020-09-03 11:39:22.447414
 ---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-08 20:52:39.416769
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-08 20:56:56.856239
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-08 20:57:10.651952
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-08 20:57:23.375597
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-09 11:56:14.893624
+---------------------------------------------
+The predicted class is:Dog Bark
+Timestamp:2020-09-09 12:05:47.014315
+---------------------------------------------
