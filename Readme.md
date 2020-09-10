@@ -90,41 +90,153 @@ https://ip-server:3003 (then it would show the dashboard)
 To access the CrateDB database:
 https://ip-server:4200
 
-## Raspberry Pi installations
+## Raspberry Pi installations (Tested on RPI 3 Modelo B and RPI 4)
 Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B. The installation of the environment that has been used for this project presents its complexity in the compatibility of versions of tensorflow and keras in Raspberry Pi as well as the correct installation of the Librosa library in this device, since it presents common problems with dependencies such as llvmlite and numba . To correctly install these dependencies, the Berryconda tool has been used, which pre-compiles these libraries, simplifying their installation on the Raspberry Pi without the need to resort to a source installation. The procedure followed is as follows:
 
-1. Instalar Berryconda (https://github.com/jjhelmus/berryconda) (modo administrador directorio (/root/berryconda3).pip
-    1. chmod +x Berryconda3-2.0.0-Linux-armv7l.sh
-    2. ./Berryconda3-2.0.0-Linux-armv7l.sh
-2. Instalar Numba and llvmlite para Librosa
-    1. conda install -c numba numba
-    2. reboot
-3. Instalar dependencias
-    1. sudo apt-get update
-    2. sudo apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev      libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev
-    3. sudo apt-get install libatlas-base-dev python3-numpy libblas-dev liblapack-dev python3-dev gfortran python3-setuptools python3-scipy
+*Info1: http://llvmlite.pydata.org/en/latest/admin-guide/install.html*
+*Info2: https://github.com/numba/numba/issues/3670*
 
-4. Una vez instalados, instalamos scikit-learn y scipy
-    1. conda install scikit-learn
-    2. reboot
-5. Instalamos Librosa
-    1. pip install librosa (FUNCIONA)
-    2. pip list (Observamos que tenemos librosa correctamente instalado)
-6. Instalar Tensorflow y Keras
-    1. sudo apt update
-    2. sudo apt-get update
-    3. sudo apt-get install python3-h5py
-    4. pip install --upgrade pip
-    5. pip list
-    6. sudo su -
-    7. pip3 install --user --upgrade tensorflow
-    8. python3 -c 'import tensorflow as tf; print(tf.__version__)'
-    9. pip3 install keras
-7. Instalar Pandas y Numpy
-	1. pip install pandas
-	2. pip install numpy
 
-In case of error there is the other possibility of using a virtual environment either created with Berryconda or with the virtualenv library. In this case, virtualenv would be installed in case of not having it or the virtual environment would be created with conda. To create the environment, it is initialized for version 3.7 of python and then the rest of the necessary libraries for the environment we are looking for are installed with pip.
+1. Set up Python3.7 environment
+    1. sudo su - (admin access)
+    2. sudo apt install libblas-dev llvm python3-pip python3-scipy
+    3. sudo apt update
+    4. sudo apt install python3-dev python3-pip
+    5. sudo apt install libatlas-base-dev
+    6. sudo pip3 install -U virtualenv
+    7. sudo apt-get install build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev liblapack-dev libblas-dev wget git cmake
+    8. cd /root/
+    9. wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+    10. tar xf Python-3.7.2.tar.xz
+    11. cd /root/Python-3.7.2
+    12. ./configure
+    13. make -j 4
+    14. sudo make altinstall
+
+    15. pip3.7 install --upgrade pip
+    16. sudo pip3.7 install wheel
+    17. sudo pip3.7 install scipy
+    18. sudo pip3.7 install pandas
+    20. sudo pip3.7 install plotly
+
+2. Install from source LLVM 10.0 (neede for llfmlite and numba librosa's dependencies)
+    1. cd /root/
+    2. git clone https://github.com/numba/numba.git
+    3. git clone https://github.com/numba/llvmlite.git
+    4. wget https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/llvm-10.0.1.src.tar.xz 
+    5. tar -xf llvm-10.0.1.src.tar.xz
+
+    6. cd /root/llvm-10.0.1.src.tar.xz
+    7. patch -p1 -i /root/llvmlite/conda-recipes/llvm-lto-static.patch
+    8. patch -p1 -i /root/llvmlite/conda-recipes/partial-testing.patch
+    9. patch -p1 -i /root/llvmlite/conda-recipes/intel-D47188-svml-VF.patch
+    10. patch -p1 -i /root/llvmlite/conda-recipes/0001-Revert-Limit-size-of-non-GlobalValue-name.patch/root/llvmli
+
+    11. export PREFIX=/usr/local CPU_COUNT=4
+    12. chmod +x /root/llvmlite/conda-recipes/llvmdev/build.sh
+    13. /root/llvmlite/conda-recipes/llvmdev/build.sh (It took about 12 hours to install it, aproximately or more it depends on the rpi)
+
+3. Config LLVM for our environment
+    1. cd /root/llvmlite
+    2. export LLVM_CONFIG=/bin/llvm-config
+    3. python3.7 setup.py build
+    4. python3.7 runtests.py
+    5. python3.7 setup.py install
+
+    6. cd /root/numba
+    7. python3.7 setup.py install
+
+To test if eveything is install correctly on the same environment just check pip3 packages list. Sometime we could get some output errors, but are not a problem because we installed from source LLVM and whe we used pip to install dependencies it would find htat are already correctly installed.
+
+4. pip3 list (check if llvmlite and numba are correctly installed)
+
+5. Reboot system
+6. Install Tensorflow, Librosa and Keras
+    1. sudo su -
+    2. pip3 install librosa (an error will appear, during the installation but it is checked if it has been installed with >> pip3 list)
+    3. pip3 install tensorflow
+    
+    (testing Tensorflow installation)
+    4. python3.7 -c 'import tensorflow as tf; print(tf.__version__)'  
+    
+    5. pip3 install keras
+    6. sudo apt-get install python3-h5py
+
+Finally, we will not have any problem in being able to correctly execute the scripts in this directory. The objective in this installation is to be able to install the book libraries a, tensorflow and keras in the same python environment. For this, in this case, we have chosen to install the LLVM version 10 dependency from the source in the python 3.7 environment since this will be compatible with the necessary book and tensorflow.
+
+To launch the script you would need to use the sequences:
+
+1. sudo su -
+2. cd /home/pi/ml-exercise/SSEnCE-rep
+3. python3.7 sound_class_raspberry.py (important to take into account python3.7 that we used as our python env)
+
+Here we have the needed Python 3.7 libraries.
+
+root@raspberrypi:~# pip3 list
+
+|   Package         |Version
+| --------------------| ----------------------------
+| absl-py             | 0.10.0
+| appdirs             | 1.4.4
+| astor               | 0.8.1
+| audioread           | 2.1.8
+| cachetools          | 4.1.1
+| certifi             | 2020.6.20
+| cffi                | 1.14.2
+| chardet             | 3.0.4
+| decorator           | 4.4.2
+| gast                | 0.2.2
+| google-auth         | 1.21.1
+| google-auth-oauthlib| 0.4.1
+| google-pasta        | 0.2.0
+| grpcio              | 1.32.0
+| h5py                | 2.10.0
+| idna                | 2.10
+| importlib-metadata  | 1.7.0
+| joblib              | 0.16.0
+| Keras               | 2.4.3
+| Keras-Applications  | 1.0.8
+| Keras-Preprocessing | 1.1.2
+| librosa             | 0.8.0
+| llvmlite            | 0.35.0.dev0+5.g4acef2d.dirty
+| Markdown            | 3.2.2
+| numba               | 0.52.0.dev0+162.gf88c3c5d1
+| numpy               | 1.19.1
+| oauthlib            | 3.1.0
+| opt-einsum          | 3.3.0
+| packaging           | 20.4
+| pandas              | 1.1.1
+| pip                 | 20.2.2
+| plotly              | 4.9.0
+| pooch               | 1.1.1
+| protobuf            | 3.13.0
+| pyasn1              | 0.4.8
+| pyasn1-modules      | 0.2.8
+| pycparser           | 2.20
+| pyparsing           | 2.4.7
+| python-dateutil     | 2.8.1
+| pytz                | 2020.1
+| PyYAML              | 5.3.1
+| requests            | 2.24.0
+| requests-oauthlib   | 1.3.0
+| resampy             | 0.2.2
+| retrying            | 1.3.3
+| rsa                 | 4.6
+| scikit-learn        | 0.23.2
+| scipy               | 1.5.2
+| setuptools          | 50.3.0
+| six                 | 1.15.0
+| SoundFile           | 0.10.3.post1
+| tensorboard         | 2.0.2
+| tensorflow          | 1.14.0
+| tensorflow-estimator| 1.14.0
+| termcolor           | 1.1.0
+| threadpoolctl       | 2.1.0
+| urllib3             | 1.25.10
+| Werkzeug            | 1.0.1
+| wheel               | 0.35.1
+| wrapt               | 1.12.1
+| zipp                | 3.1.0
 
 ## Feature extraction from sound
 ### Introduction
