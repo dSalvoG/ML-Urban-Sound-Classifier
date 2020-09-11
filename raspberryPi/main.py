@@ -60,7 +60,7 @@ while times < num_max:
     
     todaydate = datetime.date.today()
     today = todaydate.strftime("%d_%m_%Y")
-    file_name_with_extension = "a-a-audio-0-" + today + "-" + str(times) + ".wav"
+    file_name_with_extension = "audio-0-" + today + "-" + str(times) + ".wav"
 
     stream.stop_stream()
     stream.close()
