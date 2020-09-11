@@ -1,0 +1,15 @@
+Model 6:	 	69.38%
+Model 9_2:	69.12%
+Model 1:	 	68.50%
+Model 9: 	 	68.01%
+Model_6_ds:	66.34%
+Model 5:	 	65.17%
+Model 10:	 	64.40%
+Model 2:	 	62.84%
+Model 7:	 	60.02%
+Model 3:	 	58.05%
+Model 4:	 	55.66%
+Model 8: 	 	53.85%
+
+
+

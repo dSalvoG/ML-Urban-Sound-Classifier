@@ -14,8 +14,7 @@ import os
 import tensorflow as tf
 from tensorflow.keras import models
 import numpy as np
-from functions import extract_features
-from threshold import thres
+from functions import thres
 
 # Sample rate: 48 kHz. Resolution: 16 bits. Channel: 1
 chunk = 960
@@ -24,35 +23,13 @@ CHANNELS = 1
 RATE = 48000
 
 # num_max: number of wav files to record.
-SHORT_RECORD = 1
-LONG_RECORD = 4
-record_seconds = SHORT_RECORD
+record_seconds = 4.064
 # 50 min of recordings with 4 seconds
-num_max = 30
+num_max = 1000
 times = 0
 condition = False
-
-# Function for classify
-def print_class(parent_dir, sub_dirs):
-
-    features,labels = extract_features(parent_dir,sub_dirs)
-    
-    
-    start_pred = datetime.datetime.now()
-
-    predicted_vector = model.predict_classes(features)
-    predicted_proba_vector = model.predict_proba(features) 
-    predicted_proba = predicted_proba_vector[0]
-
-    stop_pred = datetime.datetime.now() - start_pred
-    print('Prediction time: ', stop_pred)
-
 # LOAD PRE-TRAINED MODEL
-model = tf.keras.models.load_model('models/no10_model.h5')
-
-class_names = ['Air Conditioner', 'Car Horn', 'Children Playing', 'Dog Bark', 
-               'Drilling', 'Engine Idling', 'Gun Shot', 
-               'Jackhammer', 'Siren', 'Street Music']
+model = tf.keras.models.load_model('models/model_6.h5')
 
 parent_dir = 'audio'
 sub_dirs= ['input']
@@ -98,22 +75,12 @@ while times < num_max:
 
     stop_save =  datetime.datetime.now() - start_save
     print('Saving time: ', stop_save)
-    
-    # If the signal raise
-    if condition:
-        print_class(parent_dir,sub_dirs)
-        record_seconds = SHORT_RECORD
-        condition = False
-    else:
-        condition = thres(parent_dir=parent_dir,sub_dirs=sub_dirs)
-        if condition:
-            record_seconds = LONG_RECORD
-        
-    print(condition)
+
+    thres(parent_dir=parent_dir,sub_dirs=sub_dirs,model=model)
 
     start_clean = datetime.datetime.now()
 
-    remove_path = "/home/pi/Desktop/SSEnCE_merged/audio/input/"+file_name_with_extension
+    remove_path = "/home/pi/ml-exercise/SSEnCE-merged/audio/input/"+file_name_with_extension
     os.remove(remove_path)
 
     stop_clean = datetime.datetime.now() - start_clean
