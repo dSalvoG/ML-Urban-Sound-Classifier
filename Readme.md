@@ -138,7 +138,7 @@ Once we get all scripts needed to get our classification model, and it is runnin
 
 3. Config LLVM for our environment
     1. cd /root/llvmlite
-    2. export LLVM_CONFIG=/bin/llvm-config
+    2. export LLVM_CONFIG=/bin/llvm-config (if not, try with: export LLVM_CONFIG=/usr/local/bin/llvm-config)
     3. python3.7 setup.py build
     4. python3.7 runtests.py
     5. python3.7 setup.py install
@@ -153,13 +153,13 @@ To test if eveything is install correctly on the same environment just check pip
 5. Reboot system
 6. Install Tensorflow, Librosa and Keras
     1. sudo su -
-    2. pip3 install librosa (an error will appear, during the installation but it is checked if it has been installed with >> pip3 list)
-    3. pip3 install tensorflow
+    2. pip3.7 install librosa (an error will appear, during the installation but it is checked if it has been installed with >> pip3 list)
+    3. pip3.7 install tensorflow
     
     (testing Tensorflow installation)
     4. python3.7 -c 'import tensorflow as tf; print(tf.__version__)'  
     
-    5. pip3 install keras
+    5. pip3.7 install keras
     6. sudo apt-get install python3-h5py
 
 Finally, we will not have any problem in being able to correctly execute the scripts in this directory. The objective in this installation is to be able to install the book libraries a, tensorflow and keras in the same python environment. For this, in this case, we have chosen to install the LLVM version 10 dependency from the source in the python 3.7 environment since this will be compatible with the necessary book and tensorflow.
