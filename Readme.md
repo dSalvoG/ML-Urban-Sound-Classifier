@@ -161,14 +161,21 @@ To test if eveything is install correctly on the same environment just check pip
     
     5. pip3.7 install keras
     6. sudo apt-get install python3-h5py
+    7. pip3.7 install pyaudio
+    8. pip3.7 install requests
 
 Finally, we will not have any problem in being able to correctly execute the scripts in this directory. The objective in this installation is to be able to install the book libraries a, tensorflow and keras in the same python environment. For this, in this case, we have chosen to install the LLVM version 10 dependency from the source in the python 3.7 environment since this will be compatible with the necessary book and tensorflow.
 
 To launch the script you would need to use the sequences:
 
 1. sudo su -
-2. cd /home/pi/ml-exercise/SSEnCE-rep
+2. cd /home/pi/ml-exercise/SSEnCE-merged
 3. python3.7 sound_class_raspberry.py (important to take into account python3.7 that we used as our python env)
+
+To launch the sound classificator with the MIC, for streaming classification. You must deploy main.py from raspberryPi folder.
+
+1. cd /home/pi/ml-exercise/SSEnCE-merged
+1. python3.7 main.py
 
 Here we have the needed Python 3.7 libraries.
 

@@ -29,7 +29,7 @@ num_max = 1000
 times = 0
 condition = False
 # LOAD PRE-TRAINED MODEL
-model = tf.keras.models.load_model('models/model_6.h5')
+model = tf.keras.models.load_model('models/no10_model.h5')
 
 parent_dir = 'audio'
 sub_dirs= ['input']
