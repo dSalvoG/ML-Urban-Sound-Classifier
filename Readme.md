@@ -90,6 +90,12 @@ https://ip-server:3003 (then it would show the dashboard)
 To access the CrateDB database:
 https://ip-server:4200
 
+6. POSTMAN API Collection
+
+Following this link, you would get into the http POST and REQUEST message to manage and configure your FIWARE network. It would be very useful if you follow this postman collection to configure Content Orion-Broker and manage QuantumLeap subscriptions.
+
+https://www.getpostman.com/collections/62c9ec30543ed1678428
+
 ## Raspberry Pi installations (Tested on RPI 3 Modelo B and RPI 4)
 Once we get all scripts needed to get our classification model, and it is running correctly, then we implement these software onto the Raspberry Pi Model 3 B. The installation of the environment that has been used for this project presents its complexity in the compatibility of versions of tensorflow and keras in Raspberry Pi as well as the correct installation of the Librosa library in this device, since it presents common problems with dependencies such as llvmlite and numba . To correctly install these dependencies, the Berryconda tool has been used, which pre-compiles these libraries, simplifying their installation on the Raspberry Pi without the need to resort to a source installation. The procedure followed is as follows:
 
