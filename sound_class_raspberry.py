@@ -72,7 +72,7 @@ print (str(currentDT))
 import requests
 
 # defining the api-endpoint
-API_ENDPOINT = "http://localhost:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
+API_ENDPOINT = "http://158.42.160.78:1026/v2/entities/urn:ngsi-ld:AcousticNode:000/attrs"
 
 # passing data classification to json format
 
